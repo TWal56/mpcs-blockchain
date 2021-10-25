@@ -64,3 +64,64 @@ class Registrar(object):
             jcoin__pb2.LastNode.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class HandshakeStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.Shake = channel.unary_unary(
+                '/jcoin.Handshake/Shake',
+                request_serializer=jcoin__pb2.CallerShake.SerializeToString,
+                response_deserializer=jcoin__pb2.ReceiverShake.FromString,
+                )
+
+
+class HandshakeServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def Shake(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_HandshakeServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'Shake': grpc.unary_unary_rpc_method_handler(
+                    servicer.Shake,
+                    request_deserializer=jcoin__pb2.CallerShake.FromString,
+                    response_serializer=jcoin__pb2.ReceiverShake.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'jcoin.Handshake', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class Handshake(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def Shake(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/jcoin.Handshake/Shake',
+            jcoin__pb2.CallerShake.SerializeToString,
+            jcoin__pb2.ReceiverShake.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
