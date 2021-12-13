@@ -15,26 +15,38 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "io.grpc.examples.helloworld";
-option java_outer_classname = "HelloWorldProto";
-option objc_class_prefix = "HLW";
+option java_package = "io.grpc.examples.jcoin";
+option java_outer_classname = "JCoinProto";
+option objc_class_prefix = "JCN";
 
-package helloworld;
+package jcoin;
 
-// The greeting service definition.
-service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
-  // Sends another greeting
-  rpc SayHelloAgain (HelloRequest) returns (HelloReply) {}
+
+service Registrar {
+  rpc Register (NewNode) returns (LastNode) {}
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
+message NewNode {
+  string nVersion = 1;
+  string nTime = 2;
+  string addrMe = 3;
 }
 
-// The response message containing the greetings
-message HelloReply {
-  string message = 1;
+message LastNode {
+  string lastNodeIp = 1;
+}
+
+service Handshake {
+  rpc Shake (CallerShake) returns (ReceiverShake) {}
+}
+
+message CallerShake {
+  string nVersion = 1;
+  string nTime = 2;
+  string addrMe = 3;
+  int32 bestHeight = 4;
+}
+
+message ReceiverShake {
+  repeated string knownPeers = 1;
 }
