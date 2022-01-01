@@ -50,3 +50,11 @@ message CallerShake {
 message ReceiverShake {
   repeated string knownPeers = 1;
 }
+
+service TransactionCast {
+
+}
+
+service BlockCast {
+
+}

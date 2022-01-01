@@ -14,13 +14,14 @@
 
 from __future__ import print_function
 from concurrent import futures
+from collections import OrderedDict
 import logging
 import grpc
 import jcoin_pb2
 import jcoin_pb2_grpc
 import datetime
 import socket
-from collections import OrderedDict
+import threading
 
 
 # confirm node has registered with DNS_SEED
@@ -129,5 +130,4 @@ if __name__ == '__main__':
         print('\nlastNodeIp IS NULL')
     serve_handshake(lastNodeIp)
 
-# git test...
 ###
