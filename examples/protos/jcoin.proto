@@ -21,7 +21,7 @@ option objc_class_prefix = "JCN";
 
 package jcoin;
 
-
+// Service: Registrar
 service Registrar {
   rpc Register (NewNode) returns (LastNode) {}
 }
@@ -36,6 +36,7 @@ message LastNode {
   string lastNodeIp = 1;
 }
 
+// Service: Handshake
 service Handshake {
   rpc Shake (CallerShake) returns (ReceiverShake) {}
 }
@@ -51,10 +52,28 @@ message ReceiverShake {
   repeated string knownPeers = 1;
 }
 
-service TransactionCast {
-
+// Service: TxnCast
+service TxnCast {
+  rpc TxnCast (NewTxn) returns (TxnReceived)
 }
 
-service BlockCast {
+message NewTxn {
+// serialized transaction data
+}
 
+message TxnReceived {
+// message receipt?
+}
+
+// Service: BlockCast
+service BlockCast {
+  rpc BlockCast (NewBlock) returns (BlockReceived)
+}
+
+message NewBlock {
+//
+}
+
+message BlockReceived {
+//
 }
