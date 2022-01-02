@@ -6,7 +6,8 @@ import jcoin_pb2 as jcoin__pb2
 
 
 class RegistrarStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """Service: Registrar
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -22,7 +23,8 @@ class RegistrarStub(object):
 
 
 class RegistrarServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """Service: Registrar
+    """
 
     def Register(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -46,7 +48,8 @@ def add_RegistrarServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Registrar(object):
-    """Missing associated documentation comment in .proto file."""
+    """Service: Registrar
+    """
 
     @staticmethod
     def Register(request,
@@ -67,7 +70,8 @@ class Registrar(object):
 
 
 class HandshakeStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """Service: Handshake
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -83,7 +87,8 @@ class HandshakeStub(object):
 
 
 class HandshakeServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """Service: Handshake
+    """
 
     def Shake(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -107,7 +112,8 @@ def add_HandshakeServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class Handshake(object):
-    """Missing associated documentation comment in .proto file."""
+    """Service: Handshake
+    """
 
     @staticmethod
     def Shake(request,
@@ -123,5 +129,133 @@ class Handshake(object):
         return grpc.experimental.unary_unary(request, target, '/jcoin.Handshake/Shake',
             jcoin__pb2.CallerShake.SerializeToString,
             jcoin__pb2.ReceiverShake.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class TxnCastStub(object):
+    """Service: TxnCast
+    """
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.CastTrans = channel.unary_unary(
+                '/jcoin.TxnCast/CastTrans',
+                request_serializer=jcoin__pb2.NewTxn.SerializeToString,
+                response_deserializer=jcoin__pb2.TxnReceived.FromString,
+                )
+
+
+class TxnCastServicer(object):
+    """Service: TxnCast
+    """
+
+    def CastTrans(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_TxnCastServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'CastTrans': grpc.unary_unary_rpc_method_handler(
+                    servicer.CastTrans,
+                    request_deserializer=jcoin__pb2.NewTxn.FromString,
+                    response_serializer=jcoin__pb2.TxnReceived.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'jcoin.TxnCast', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class TxnCast(object):
+    """Service: TxnCast
+    """
+
+    @staticmethod
+    def CastTrans(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/jcoin.TxnCast/CastTrans',
+            jcoin__pb2.NewTxn.SerializeToString,
+            jcoin__pb2.TxnReceived.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class BlockCastStub(object):
+    """Service: BlockCast
+    """
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.CastBlock = channel.unary_unary(
+                '/jcoin.BlockCast/CastBlock',
+                request_serializer=jcoin__pb2.NewBlock.SerializeToString,
+                response_deserializer=jcoin__pb2.BlockReceived.FromString,
+                )
+
+
+class BlockCastServicer(object):
+    """Service: BlockCast
+    """
+
+    def CastBlock(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_BlockCastServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'CastBlock': grpc.unary_unary_rpc_method_handler(
+                    servicer.CastBlock,
+                    request_deserializer=jcoin__pb2.NewBlock.FromString,
+                    response_serializer=jcoin__pb2.BlockReceived.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'jcoin.BlockCast', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class BlockCast(object):
+    """Service: BlockCast
+    """
+
+    @staticmethod
+    def CastBlock(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/jcoin.BlockCast/CastBlock',
+            jcoin__pb2.NewBlock.SerializeToString,
+            jcoin__pb2.BlockReceived.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
