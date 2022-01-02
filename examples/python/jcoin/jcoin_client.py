@@ -20,6 +20,7 @@ import grpc
 import jcoin_pb2
 import jcoin_pb2_grpc
 import datetime
+import time
 import socket
 import threading
 
@@ -30,7 +31,7 @@ import threading
 # also listen for new transactions...and blocks...
 
 ##########
-# Launch a new node and register with registrar server
+# LAUNCH A NEW NODE AND REGISTER WITH REGISTRAR SERVER
 ##########
 
 def launch_node():
@@ -49,8 +50,9 @@ def launch_node():
 
 
 ##########
-# Handshake server to process inbound shakes
+# HANDSHAKE OPERATIONS
 ##########
+# Handshake server to process inbound shakes
 
 class Handshake(jcoin_pb2_grpc.HandshakeServicer):
 
@@ -67,31 +69,10 @@ class Handshake(jcoin_pb2_grpc.HandshakeServicer):
             print('node ' + request.addrMe + ' is already known!')
         print('\nNew Inbound Shake from ' + request.addrMe + ' ...')
         print('\nKnown Peers now = ' + str(self.known_peers))
-        # r_shake_peers = jcoin_pb2.ReceiverShake().knownPeers
-        # r_shake_peers.extend(list(self.known_peers))
-        # print('\nKnown Peers EXTENDED for RPC response = ' + str(r_shake_peers))
-        # return jcoin_pb2.ReceiverShake(knownPeers=r_shake_peers)
         return jcoin_pb2.ReceiverShake(knownPeers=self.known_peers)
 
 
-def serve_handshake(lastIp):
-    # add dynamic bestHeight???
-    if lastIp != "NULL" and lastIp not in Handshake.known_peers:
-        Handshake.known_peers[lastIp] = {'nTime': str(datetime.datetime.now().strftime("%Y%m%d-%H%M%S")),
-                                         'nVersion': '1',
-                                         'bestHeight': 0}
-    node_ip = socket.gethostbyname(socket.gethostname())
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    jcoin_pb2_grpc.add_HandshakeServicer_to_server(Handshake(), server)
-    server.add_insecure_port(socket.gethostbyname(socket.gethostname()) + ':58333')
-    server.start()
-    print('\nHandshake Server is live on ' + node_ip + ':58333')
-    server.wait_for_termination()
-
-
-##########
 # Handshake call outbound
-##########
 
 def shake_hands(ip_add):
     current_time = str(datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
@@ -105,7 +86,70 @@ def shake_hands(ip_add):
 
 
 ##########
-# Run program
+# TXN OPERATIONS
+##########
+# Txn server to process inbound shakes
+
+class TxnCast(jcoin_pb2_grpc.TxnCastServicer):
+    # for now just pass simple strings...
+    txn_mempool = {}
+  
+    def CastTrans(self, request, context):
+        if request.txn not in self.txn_mempool:
+            txn_count = str(len(self.txn_mempool) + 1)
+            self.txn_mempool[txn_count] = {'txn': request.txn, 'from': request.addrMe}
+        else:
+            print('txn ' + request.txn + ' is already known!')
+        print('\nNew Inbound Txn from ' + request.addrMe + ' ...')
+        print('\nTxn MemPool now = ' + str(self.txn_mempool))
+        return jcoin_pb2.TxnReceived(txnConfirm='Txn Confirmed!')
+
+
+# Txn call outbound
+# adding hardcoded ip
+def cast_trans(ip_add):
+    current_time = str(datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
+    node_ip = socket.gethostbyname(socket.gethostname())
+    channel = grpc.insecure_channel(ip_add + ':58333')
+    stub = jcoin_pb2_grpc.TxnCastStub(channel)
+    response = stub.CastTrans(jcoin_pb2.NewTxn(txn='test txn 1', addrMe=node_ip))
+    return response.txnConfirm
+
+
+##########
+# BLOCK OPERATIONS
+##########
+# Block server to process inbound shakes
+
+
+# Block call outbound
+
+
+##########
+# GRPC SERVE FUNCTION
+##########
+
+def serve_jcoin_node(lastIp):
+    # add dynamic bestHeight???
+    if lastIp != "NULL" and lastIp not in Handshake.known_peers:
+        Handshake.known_peers[lastIp] = {'nTime': str(datetime.datetime.now().strftime("%Y%m%d-%H%M%S")),
+                                         'nVersion': '1',
+                                         'bestHeight': 0}
+    node_ip = socket.gethostbyname(socket.gethostname())
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    jcoin_pb2_grpc.add_HandshakeServicer_to_server(Handshake(), server)
+    jcoin_pb2_grpc.add_TxnCastServicer_to_server(TxnCast(), server)
+    server.add_insecure_port(socket.gethostbyname(socket.gethostname()) + ':58333')
+    server.start()
+    print('\nJCOIN CLIENT SERVER IS LIVE ON ' + node_ip + ':58333')
+    if node_ip == '172.17.0.4':
+        txnConfirm = cast_trans('172.17.0.3')
+        print('txn test cast response = ' + txnConfirm)
+    server.wait_for_termination()
+
+
+##########
+# RUN PROGRAM
 ##########
 
 if __name__ == '__main__':
@@ -128,6 +172,7 @@ if __name__ == '__main__':
         print('\nAll known peers currently on this node = ' + str(list(Handshake.known_peers)))
     else:
         print('\nlastNodeIp IS NULL')
-    serve_handshake(lastNodeIp)
+    serve_jcoin_node(lastNodeIp)
+
 
 ###

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\026io.grpc.examples.jcoinB\nJCoinProtoP\001\242\002\003JCN',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0bjcoin.proto\x12\x05jcoin\":\n\x07NewNode\x12\x10\n\x08nVersion\x18\x01 \x01(\t\x12\r\n\x05nTime\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x03 \x01(\t\"\x1e\n\x08LastNode\x12\x12\n\nlastNodeIp\x18\x01 \x01(\t\"R\n\x0b\x43\x61llerShake\x12\x10\n\x08nVersion\x18\x01 \x01(\t\x12\r\n\x05nTime\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x03 \x01(\t\x12\x12\n\nbestHeight\x18\x04 \x01(\x05\"#\n\rReceiverShake\x12\x12\n\nknownPeers\x18\x01 \x03(\t2:\n\tRegistrar\x12-\n\x08Register\x12\x0e.jcoin.NewNode\x1a\x0f.jcoin.LastNode\"\x00\x32@\n\tHandshake\x12\x33\n\x05Shake\x12\x12.jcoin.CallerShake\x1a\x14.jcoin.ReceiverShake\"\x00\x42,\n\x16io.grpc.examples.jcoinB\nJCoinProtoP\x01\xa2\x02\x03JCNb\x06proto3'
+  serialized_pb=b'\n\x0bjcoin.proto\x12\x05jcoin\":\n\x07NewNode\x12\x10\n\x08nVersion\x18\x01 \x01(\t\x12\r\n\x05nTime\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x03 \x01(\t\"\x1e\n\x08LastNode\x12\x12\n\nlastNodeIp\x18\x01 \x01(\t\"R\n\x0b\x43\x61llerShake\x12\x10\n\x08nVersion\x18\x01 \x01(\t\x12\r\n\x05nTime\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x03 \x01(\t\x12\x12\n\nbestHeight\x18\x04 \x01(\x05\"#\n\rReceiverShake\x12\x12\n\nknownPeers\x18\x01 \x03(\t\"%\n\x06NewTxn\x12\x0b\n\x03txn\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x02 \x01(\t\"!\n\x0bTxnReceived\x12\x12\n\ntxnConfirm\x18\x01 \x01(\t\"\x19\n\x08NewBlock\x12\r\n\x05\x62lock\x18\x01 \x01(\t\"%\n\rBlockReceived\x12\x14\n\x0c\x62lockConfirm\x18\x01 \x01(\t2:\n\tRegistrar\x12-\n\x08Register\x12\x0e.jcoin.NewNode\x1a\x0f.jcoin.LastNode\"\x00\x32@\n\tHandshake\x12\x33\n\x05Shake\x12\x12.jcoin.CallerShake\x1a\x14.jcoin.ReceiverShake\"\x00\x32;\n\x07TxnCast\x12\x30\n\tCastTrans\x12\r.jcoin.NewTxn\x1a\x12.jcoin.TxnReceived\"\x00\x32\x41\n\tBlockCast\x12\x34\n\tCastBlock\x12\x0f.jcoin.NewBlock\x1a\x14.jcoin.BlockReceived\"\x00\x42,\n\x16io.grpc.examples.jcoinB\nJCoinProtoP\x01\xa2\x02\x03JCNb\x06proto3'
 )
 
 
@@ -187,10 +187,149 @@ _RECEIVERSHAKE = _descriptor.Descriptor(
   serialized_end=233,
 )
 
+
+_NEWTXN = _descriptor.Descriptor(
+  name='NewTxn',
+  full_name='jcoin.NewTxn',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='txn', full_name='jcoin.NewTxn.txn', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='addrMe', full_name='jcoin.NewTxn.addrMe', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=235,
+  serialized_end=272,
+)
+
+
+_TXNRECEIVED = _descriptor.Descriptor(
+  name='TxnReceived',
+  full_name='jcoin.TxnReceived',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='txnConfirm', full_name='jcoin.TxnReceived.txnConfirm', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=274,
+  serialized_end=307,
+)
+
+
+_NEWBLOCK = _descriptor.Descriptor(
+  name='NewBlock',
+  full_name='jcoin.NewBlock',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='block', full_name='jcoin.NewBlock.block', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=309,
+  serialized_end=334,
+)
+
+
+_BLOCKRECEIVED = _descriptor.Descriptor(
+  name='BlockReceived',
+  full_name='jcoin.BlockReceived',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='blockConfirm', full_name='jcoin.BlockReceived.blockConfirm', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=336,
+  serialized_end=373,
+)
+
 DESCRIPTOR.message_types_by_name['NewNode'] = _NEWNODE
 DESCRIPTOR.message_types_by_name['LastNode'] = _LASTNODE
 DESCRIPTOR.message_types_by_name['CallerShake'] = _CALLERSHAKE
 DESCRIPTOR.message_types_by_name['ReceiverShake'] = _RECEIVERSHAKE
+DESCRIPTOR.message_types_by_name['NewTxn'] = _NEWTXN
+DESCRIPTOR.message_types_by_name['TxnReceived'] = _TXNRECEIVED
+DESCRIPTOR.message_types_by_name['NewBlock'] = _NEWBLOCK
+DESCRIPTOR.message_types_by_name['BlockReceived'] = _BLOCKRECEIVED
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 NewNode = _reflection.GeneratedProtocolMessageType('NewNode', (_message.Message,), {
@@ -221,6 +360,34 @@ ReceiverShake = _reflection.GeneratedProtocolMessageType('ReceiverShake', (_mess
   })
 _sym_db.RegisterMessage(ReceiverShake)
 
+NewTxn = _reflection.GeneratedProtocolMessageType('NewTxn', (_message.Message,), {
+  'DESCRIPTOR' : _NEWTXN,
+  '__module__' : 'jcoin_pb2'
+  # @@protoc_insertion_point(class_scope:jcoin.NewTxn)
+  })
+_sym_db.RegisterMessage(NewTxn)
+
+TxnReceived = _reflection.GeneratedProtocolMessageType('TxnReceived', (_message.Message,), {
+  'DESCRIPTOR' : _TXNRECEIVED,
+  '__module__' : 'jcoin_pb2'
+  # @@protoc_insertion_point(class_scope:jcoin.TxnReceived)
+  })
+_sym_db.RegisterMessage(TxnReceived)
+
+NewBlock = _reflection.GeneratedProtocolMessageType('NewBlock', (_message.Message,), {
+  'DESCRIPTOR' : _NEWBLOCK,
+  '__module__' : 'jcoin_pb2'
+  # @@protoc_insertion_point(class_scope:jcoin.NewBlock)
+  })
+_sym_db.RegisterMessage(NewBlock)
+
+BlockReceived = _reflection.GeneratedProtocolMessageType('BlockReceived', (_message.Message,), {
+  'DESCRIPTOR' : _BLOCKRECEIVED,
+  '__module__' : 'jcoin_pb2'
+  # @@protoc_insertion_point(class_scope:jcoin.BlockReceived)
+  })
+_sym_db.RegisterMessage(BlockReceived)
+
 
 DESCRIPTOR._options = None
 
@@ -231,8 +398,8 @@ _REGISTRAR = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=235,
-  serialized_end=293,
+  serialized_start=375,
+  serialized_end=433,
   methods=[
   _descriptor.MethodDescriptor(
     name='Register',
@@ -257,8 +424,8 @@ _HANDSHAKE = _descriptor.ServiceDescriptor(
   index=1,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=295,
-  serialized_end=359,
+  serialized_start=435,
+  serialized_end=499,
   methods=[
   _descriptor.MethodDescriptor(
     name='Shake',
@@ -274,5 +441,57 @@ _HANDSHAKE = _descriptor.ServiceDescriptor(
 _sym_db.RegisterServiceDescriptor(_HANDSHAKE)
 
 DESCRIPTOR.services_by_name['Handshake'] = _HANDSHAKE
+
+
+_TXNCAST = _descriptor.ServiceDescriptor(
+  name='TxnCast',
+  full_name='jcoin.TxnCast',
+  file=DESCRIPTOR,
+  index=2,
+  serialized_options=None,
+  create_key=_descriptor._internal_create_key,
+  serialized_start=501,
+  serialized_end=560,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='CastTrans',
+    full_name='jcoin.TxnCast.CastTrans',
+    index=0,
+    containing_service=None,
+    input_type=_NEWTXN,
+    output_type=_TXNRECEIVED,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_TXNCAST)
+
+DESCRIPTOR.services_by_name['TxnCast'] = _TXNCAST
+
+
+_BLOCKCAST = _descriptor.ServiceDescriptor(
+  name='BlockCast',
+  full_name='jcoin.BlockCast',
+  file=DESCRIPTOR,
+  index=3,
+  serialized_options=None,
+  create_key=_descriptor._internal_create_key,
+  serialized_start=562,
+  serialized_end=627,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='CastBlock',
+    full_name='jcoin.BlockCast.CastBlock',
+    index=0,
+    containing_service=None,
+    input_type=_NEWBLOCK,
+    output_type=_BLOCKRECEIVED,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_BLOCKCAST)
+
+DESCRIPTOR.services_by_name['BlockCast'] = _BLOCKCAST
 
 # @@protoc_insertion_point(module_scope)

@@ -54,26 +54,27 @@ message ReceiverShake {
 
 // Service: TxnCast
 service TxnCast {
-  rpc TxnCast (NewTxn) returns (TxnReceived)
+  rpc CastTrans (NewTxn) returns (TxnReceived) {}
 }
 
 message NewTxn {
-// serialized transaction data
+  string txn = 1;
+  string addrMe = 2;
 }
 
 message TxnReceived {
-// message receipt?
+  string txnConfirm = 1;
 }
 
 // Service: BlockCast
 service BlockCast {
-  rpc BlockCast (NewBlock) returns (BlockReceived)
+  rpc CastBlock (NewBlock) returns (BlockReceived) {}
 }
 
 message NewBlock {
-//
+  string block = 1;
 }
 
 message BlockReceived {
-//
+  string blockConfirm = 1;
 }
