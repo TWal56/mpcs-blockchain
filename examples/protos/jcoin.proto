@@ -73,6 +73,7 @@ service BlockCast {
 
 message NewBlock {
   string block = 1;
+  string addrMe = 2;
 }
 
 message BlockReceived {

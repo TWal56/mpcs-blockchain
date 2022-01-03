@@ -14,7 +14,7 @@ import socket
 # Linking transactions together via input-output relationships?
 
 ##########
-# Blockchain classes
+# BLOCKCHAIN CLASSES
 ##########
 
 # The Block's Blockhash is a hash of the current block's header.
@@ -184,7 +184,7 @@ class TxOutput:
         return for_vout
 
 ##########
-# Functions
+# BLOCKCHAIN FUNCTIONS
 ##########
 
 
@@ -357,10 +357,9 @@ def create_genesis():
 
 
 ##########
-# Setup TxnMemory Pool and Mining operation
+# SETUP TXN MEM POOL AND MINING OPERATION
 ##########
 # cryptocurrency name = Jennycoin
-# denominated in Jennyoshis
 # 1000 Jennyoshis = 1 Jennycoin
 
 # inputs should be list of tuples with (prev_tx_id, prev_vout_idx)
@@ -434,7 +433,7 @@ def mine_blocks():
 
 
 ##########
-# Run
+# RUN MINING OPERATION
 ##########
 
 block_reward = 50000
@@ -449,27 +448,6 @@ tx_thread = threading.Thread(target=create_txns_for_mem_pool)
 mining_thread = threading.Thread(target=mine_blocks)
 tx_thread.start()
 mining_thread.start()
-
-# start mining: (pull txns from memory pool, note max allowed per block)
-# mine_blocks()
-
-# Loop through Blockchain and print key data
-# i = 0
-#for block_hash in Blockchain.keys():
-#    # check coinbase?
-#    print('Block Number = ' + str(i))
-#    print('Block Height = ' + str(Blockchain[block_hash].height))
-#    print('nTx = ' + str(Blockchain[block_hash].TransactionCounter))
-#    print('Merkle Root = ' + Blockchain[block_hash].BlockHeader.hashMerkleRoot)
-#    print('Nonce = ' + str(Blockchain[block_hash].BlockHeader.Nonce))
-#    print('Blockhash = ' + block_hash)
-#    print('Previous Block Hash = ' + Blockchain[block_hash].previousblockhash)
-#    print('Next Block Hash = ' + str(Blockchain[block_hash].nextblockhash) + '\n')
-#    i += 1
-
-#print('\n*****Last Block*****\n')
-#last_block_hash = list(Blockchain)[-1]
-#Blockchain[last_block_hash].printBlock()
 
 ###
 
