@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\026io.grpc.examples.jcoinB\nJCoinProtoP\001\242\002\003JCN',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0bjcoin.proto\x12\x05jcoin\":\n\x07NewNode\x12\x10\n\x08nVersion\x18\x01 \x01(\t\x12\r\n\x05nTime\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x03 \x01(\t\"\x1e\n\x08LastNode\x12\x12\n\nlastNodeIp\x18\x01 \x01(\t\"R\n\x0b\x43\x61llerShake\x12\x10\n\x08nVersion\x18\x01 \x01(\t\x12\r\n\x05nTime\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x03 \x01(\t\x12\x12\n\nbestHeight\x18\x04 \x01(\x05\"#\n\rReceiverShake\x12\x12\n\nknownPeers\x18\x01 \x03(\t\"%\n\x06NewTxn\x12\x0b\n\x03txn\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x02 \x01(\t\"!\n\x0bTxnReceived\x12\x12\n\ntxnConfirm\x18\x01 \x01(\t\"\x19\n\x08NewBlock\x12\r\n\x05\x62lock\x18\x01 \x01(\t\"%\n\rBlockReceived\x12\x14\n\x0c\x62lockConfirm\x18\x01 \x01(\t2:\n\tRegistrar\x12-\n\x08Register\x12\x0e.jcoin.NewNode\x1a\x0f.jcoin.LastNode\"\x00\x32@\n\tHandshake\x12\x33\n\x05Shake\x12\x12.jcoin.CallerShake\x1a\x14.jcoin.ReceiverShake\"\x00\x32;\n\x07TxnCast\x12\x30\n\tCastTrans\x12\r.jcoin.NewTxn\x1a\x12.jcoin.TxnReceived\"\x00\x32\x41\n\tBlockCast\x12\x34\n\tCastBlock\x12\x0f.jcoin.NewBlock\x1a\x14.jcoin.BlockReceived\"\x00\x42,\n\x16io.grpc.examples.jcoinB\nJCoinProtoP\x01\xa2\x02\x03JCNb\x06proto3'
+  serialized_pb=b'\n\x0bjcoin.proto\x12\x05jcoin\":\n\x07NewNode\x12\x10\n\x08nVersion\x18\x01 \x01(\t\x12\r\n\x05nTime\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x03 \x01(\t\"\x1e\n\x08LastNode\x12\x12\n\nlastNodeIp\x18\x01 \x01(\t\"R\n\x0b\x43\x61llerShake\x12\x10\n\x08nVersion\x18\x01 \x01(\t\x12\r\n\x05nTime\x18\x02 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x03 \x01(\t\x12\x12\n\nbestHeight\x18\x04 \x01(\x05\"#\n\rReceiverShake\x12\x12\n\nknownPeers\x18\x01 \x03(\t\"%\n\x06NewTxn\x12\x0b\n\x03txn\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x02 \x01(\t\"!\n\x0bTxnReceived\x12\x12\n\ntxnConfirm\x18\x01 \x01(\t\")\n\x08NewBlock\x12\r\n\x05\x62lock\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x64\x64rMe\x18\x02 \x01(\t\"%\n\rBlockReceived\x12\x14\n\x0c\x62lockConfirm\x18\x01 \x01(\t2:\n\tRegistrar\x12-\n\x08Register\x12\x0e.jcoin.NewNode\x1a\x0f.jcoin.LastNode\"\x00\x32@\n\tHandshake\x12\x33\n\x05Shake\x12\x12.jcoin.CallerShake\x1a\x14.jcoin.ReceiverShake\"\x00\x32;\n\x07TxnCast\x12\x30\n\tCastTrans\x12\r.jcoin.NewTxn\x1a\x12.jcoin.TxnReceived\"\x00\x32\x41\n\tBlockCast\x12\x34\n\tCastBlock\x12\x0f.jcoin.NewBlock\x1a\x14.jcoin.BlockReceived\"\x00\x42,\n\x16io.grpc.examples.jcoinB\nJCoinProtoP\x01\xa2\x02\x03JCNb\x06proto3'
 )
 
 
@@ -274,6 +274,13 @@ _NEWBLOCK = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='addrMe', full_name='jcoin.NewBlock.addrMe', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -287,7 +294,7 @@ _NEWBLOCK = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=309,
-  serialized_end=334,
+  serialized_end=350,
 )
 
 
@@ -318,8 +325,8 @@ _BLOCKRECEIVED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=336,
-  serialized_end=373,
+  serialized_start=352,
+  serialized_end=389,
 )
 
 DESCRIPTOR.message_types_by_name['NewNode'] = _NEWNODE
@@ -398,8 +405,8 @@ _REGISTRAR = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=375,
-  serialized_end=433,
+  serialized_start=391,
+  serialized_end=449,
   methods=[
   _descriptor.MethodDescriptor(
     name='Register',
@@ -424,8 +431,8 @@ _HANDSHAKE = _descriptor.ServiceDescriptor(
   index=1,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=435,
-  serialized_end=499,
+  serialized_start=451,
+  serialized_end=515,
   methods=[
   _descriptor.MethodDescriptor(
     name='Shake',
@@ -450,8 +457,8 @@ _TXNCAST = _descriptor.ServiceDescriptor(
   index=2,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=501,
-  serialized_end=560,
+  serialized_start=517,
+  serialized_end=576,
   methods=[
   _descriptor.MethodDescriptor(
     name='CastTrans',
@@ -476,8 +483,8 @@ _BLOCKCAST = _descriptor.ServiceDescriptor(
   index=3,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=562,
-  serialized_end=627,
+  serialized_start=578,
+  serialized_end=643,
   methods=[
   _descriptor.MethodDescriptor(
     name='CastBlock',
